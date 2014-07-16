@@ -2,9 +2,9 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
-    <title>{$title}</title>
+    <title>豆瓣一刻web版</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="阅读,读书,读物,娱乐,文化,生活,帖子,段子,短文,美文,散文,图,美图">
+    <meta name="keywords" content="MapleShaw，豆瓣一刻，web版">
     <meta name="description" content="「一刻」是豆瓣推出的优质内容精选应用,每日为你推荐豆瓣上最新最有趣的文字和图片:精彩文章,热门话题,犀利评论,搞笑图片">
     <link rel="shortcut icon" href="http://img3.douban.com/dae/ps/favicon-1a867e6c05ced53a937e8f74ccea8b74.ico" type="image/x-icon">
     <link href="http://img3.douban.com/dae/ps/packed__init_-c74a4ad402548ed14a459b05088557e2.css" rel="stylesheet">
@@ -37,6 +37,15 @@
         text-align:center; 
         display:block;
       }
+      #content li{
+        border-bottom:thin dotted #E4E4E4;
+      }
+      #content .avatar {
+        display: inline;
+        margin-right: 10px;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
     </style>
     <!-- COLLECTED CSS -->
   </head>
@@ -55,8 +64,8 @@
             <img width="48" height="48" src="http://img3.douban.com/dae/ps/logo_56-3ef03413a90e85f954c144ced276b089.png" />
           </a>
           <a class="slogan" href="/">
-        一刻
-          <span>豆瓣每日内容精选</span>
+            一刻
+          <span>豆瓣每日内容精选，网页版精彩呈现</span>
           </a>
       </div>
       </div>
@@ -66,24 +75,38 @@
       
   <div class="post-container">
     <div>
-      <h1 id="title">{$title}</h1>
+      <h1 id="title">豆瓣一刻WEB版</h1>
     </div>
     <div class="meta">
       
-      <img class="avatar" width="34" height="34" src="http://img3.douban.com/icon/u1464095-10.jpg" />
+      <img class="avatar" width="34" height="34" src="http://img3.douban.com/icon/u2718098-2.jpg" />
       
     
-      <a href="http://www.douban.com/people/mimengbb/">咪蒙</a>
+      <a href="http://www.douban.com/people/mapleshaw/">MapleShaw</a>
       
     
       
     </div>
     <div class="post-body">
-      <div id="content">{$title}</div>
+      <div id="content">
+        <ul>
+        {foreach from=$liArr key=num item=value}
+          <li>
+            <p><a href="{$value.href}" target="_blank">{$value.title}</a></p>
+            <img class="avatar" width="34" height="34" src="{$value.avatarImg}">
+            <a href="{$value.authorHref}" target="_blank">{$value.author}</a>
+            {if $value.contentImg!=''}
+            <img src="{$value.contentImg}">
+            {/if}
+            <p>{$value.firstP}</p>
+          </li>
+        {/foreach}
+        </ul>
+      </div>
     </div>
     <div class="post-ft">
       
-        <a href="http://www.douban.com/note/317526859/">来源： {$title}</a>
+        <a href="http://www.douban.com/people/mapleshaw/">作者： MapleShaw</a>
       
       <div id="share">
         <a href="javascript: void 0;" class="bn-sharing" data-pic="http://img3.douban.com/dae/ps/rec-9e40bb1aeca2817802c192618a03df7d.jpg">分享到</a>
@@ -110,7 +133,7 @@
       </p>
     </div>
     <div class="intro">
-      <h3>「一刻」是豆瓣推出的优质内容精选应用，每天为你推荐豆瓣上轻松有趣的内容</h3>
+      <h3>「一刻」是豆瓣推出的优质内容精选应用，web版本只为方便使用PC的时候阅读。当然还是希望伙伴们下载APP去enjoy！！</h3>
       <p class="download-links">
         <a href="/download/?source=post_bottom&amp;from_rec=&amp;target=ios&amp;from_pid=100003" class="prestoicon-apple">下载iPhone版</a>
         <a href="/download/?source=post_bottom&amp;from_rec=&amp;target=android&amp;from_pid=100003" class="prestoicon-android">下载Android版</a>
@@ -119,8 +142,8 @@
   </div>
 
       <p class="copyright">
-        &#169;&nbsp;2005－2014&nbsp;douban.com, all rights reserved<br />
-        北京豆网科技有限公司 联系方式：010-84799008
+        &#169;&nbsp;20013－2014&nbsp;www.mapleshaw.com, all rights reserved<br />
+        夜小枫 
       </p>
     </div>
     <script src="http://img3.douban.com/dae/ps/packed_jquery-3f65fca509a1f376102d495e49aab3d3.js"></script>

@@ -12,7 +12,6 @@
 		mkdir($article,0777);
 	}
 
-
 	for ($i=100000; $i <= 100050; $i++) { 
 		//$output = runScript("php getData.php",$i);
 		$curlobj = curl_init();
@@ -21,13 +20,11 @@
 		$output = curl_exec($curlobj);
 		curl_close($curlobj);
 
-
 		if(strpos($output,'id="title">')){
 
 			if(($TxtRes=fopen($article."/".$i.".html","w+")) === FALSE){
 			 
 				echo("创建文章模版失败");   
-			 
 				exit(); 
 			}
 
@@ -42,11 +39,7 @@
 
 			fclose ($TxtRes);
 		}
-
-
 		
 	}
-
-
 
 ?>
