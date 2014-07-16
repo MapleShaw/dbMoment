@@ -1,0 +1,17 @@
+﻿#始终忽略
+*.swp
+*.swo
+*.err
+*.diff
+*.sass-cache
+*.ruby-version
+*.db
+*.zip
+#OSX系统下忽略
+.DS_Store
+
+index.html
+article/*.html
+
+templates_c/
+
