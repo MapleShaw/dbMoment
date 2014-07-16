@@ -12,7 +12,7 @@
 		mkdir($article,0777);
 	}
 
-	for ($i=100000; $i <= 100050; $i++) { 
+	for ($i=100000; $i <= 100500; $i++) { 
 		//$output = runScript("php getData.php",$i);
 		$curlobj = curl_init();
 		curl_setopt($curlobj, CURLOPT_URL, "http://moment.douban.com/post/".$i."/");
@@ -20,7 +20,7 @@
 		$output = curl_exec($curlobj);
 		curl_close($curlobj);
 
-		if(strpos($output,'id="title">')){
+		if(strpos($output,'id="title">')&&strpos($output,'class="avatar"')){
 
 			if(($TxtRes=fopen($article."/".$i.".html","w+")) === FALSE){
 			 
@@ -35,7 +35,7 @@
 				exit();       
 			}  
 			 
-			echo "文章爬下来啦！！\n\n";
+			echo ("Hey!文章爬下来啦！！\n\n");
 
 			fclose ($TxtRes);
 		}

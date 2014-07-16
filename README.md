@@ -7,4 +7,7 @@
 ###详细的信息
 来自：[我滴Github项目页面](https://github.com/MapleShaw/dbMoment)
 
+###备注
+有些文章没有作者和头像
+
 
