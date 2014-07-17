@@ -94,14 +94,9 @@ hr {
 .download{
 	overflow:hidden;
 	*zoom:1;
-	position: fixed;
-    padding: 20px;
-    width: 280px;
-    left: 70%;
-    top: 100px;
-    background-color: #eaefee;
+	
 }
-.download .qrcode{width:150px;float:left;margin-left:40px;}
+.download .qrcode{width:150px;float:right;margin-left:40px;}
 .download .qrcode p{margin:0;font-size:12px;text-indent:7px;}
 .download .qrcode p span{
 	color:#888;
@@ -148,6 +143,18 @@ hr {
         text-align: left;
     }
 }
+
+@media(min-width: 1500px) {
+  .download{ 
+    position: fixed;
+    padding: 20px;
+    width: 280px;
+    left: 70%;
+    top: 100px;
+    background-color: #eaefee;
+  }
+  .download .qrcode{float:left;}
+}  
 .barlittle {
       background-color: #23c4ae;
       /*background-image: -moz-linear-gradient(45deg, #49E76F  25%, #A0FFD9);

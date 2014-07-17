@@ -1,4 +1,21 @@
 (function(window, $, undefined){
+
+	$(window).resize(function(){resizeLoad();});
+	
+	var resizeLoad = function(){
+		var downHtml = '';
+		$('.download').remove();
+		if(document.body.clientWidth < 1500){
+
+			downHtml = '<div class="download"><div class="qrcode"><img width="130" height="130" src="images/qr_code.png" /><p>扫描二维码下载「一刻」<br /><span>支持&nbsp;iPhone&nbsp;和&nbsp;Android</span></p></div><div class="intro"><h3>「一刻」是豆瓣推出的优质内容精选应用，web版本只为方便使用PC的时候阅读。当然还是希望伙伴们下载APP去enjoy！！</h3><p class="download-links"><a href="/download/?source=post_bottom&amp;from_rec=&amp;target=ios&amp;from_pid=100003" class="prestoicon-apple">下载iPhone版</a><a href="/download/?source=post_bottom&amp;from_rec=&amp;target=android&amp;from_pid=100003" class="prestoicon-android">下载Android版</a></p></div></div>';
+			$('.footer').prepend(downHtml);
+		}else{
+			downHtml = '<div class="download"><div class="intro"><h3>「一刻」是豆瓣推出的优质内容精选应用，web版本只为方便使用PC的时候阅读。当然还是希望伙伴们下载APP去enjoy！！</h3><p class="download-links"><a href="/download/?source=post_bottom&amp;from_rec=&amp;target=ios&amp;from_pid=100003" class="prestoicon-apple">下载iPhone版</a><a href="/download/?source=post_bottom&amp;from_rec=&amp;target=android&amp;from_pid=100003" class="prestoicon-android">下载Android版</a></p></div><div class="qrcode"><img width="130" height="130" src="images/qr_code.png" /><p>扫描二维码下载「一刻」<br /><span>支持&nbsp;iPhone&nbsp;和&nbsp;Android</span></p></div></div>';
+			$('body').append(downHtml);
+		}
+	};
+	resizeLoad();
+
 	var loadTimes = 0;
     var loaded = true;//加载过程中，滚动失效，防止重复加载
 	var loadData = function(loadTimes){
