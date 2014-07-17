@@ -1,0 +1,201 @@
+html {
+    color: #111;
+    background:#fff;
+}
+blockquote, body, button, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, pre, textarea, ul {
+    margin: 0;
+    padding: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+fieldset, img {
+    border: 0;
+}
+address, caption, cite, code, dfn, em, i, optgroup, strong, th, var 
+{
+    font-style: normal;
+    font-weight: normal;
+}
+ol, ul {
+    list-style: none;
+}
+caption, th {
+    text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+q:after, q:before {
+    content: "";
+}
+abbr, acronym {
+    border: 0;
+    font-variant: normal;
+}
+sup {
+    vertical-align: baseline;
+}
+sub {
+    vertical-align: baseline;
+}
+legend {
+    color: #000;
+}
+button,input,optgroup,option,select,textarea{
+	font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;
+}
+button,input,select,textarea{*font-size:100%}
+pre{white-space:pre-wrap;word-wrap:break-word}
+a{cursor:pointer;}
+a:link{
+	color:#37a;
+    text-decoration: none;
+}
+a:visited {
+    color: #669;
+    text-decoration:none;
+}
+a:hover{
+	color:#fff;
+	text-decoration: none;
+	background: #37a}a:active{color:#fff;
+	text-decoration: none;
+	background: #f93;
+}
+a img {
+    border-width: 0;
+    vertical-align: middle;
+}
+body, td, th {
+    font: 12px Helvetica,Arial,sans-serif;
+    line-height: 1.62;
+}
+table {
+    border-collapse: collapse;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+wbr:after {
+    content: "\00200B";
+}
+textarea {
+    resize: none;
+}
+input[type = password]:focus, input[type = text]:focus, textarea:focus {
+    outline: 0;
+}
+@font-face {
+    font-family: "presto";
+    src: url("http://img3.douban.com/dae/presto/fonts/presto.eot");
+    src: url("http://img3.douban.com/dae/presto/fonts/presto.eot?#iefix") format("embedded-opentype"), 
+    	 url("http://img3.douban.com/dae/presto/fonts/presto.woff") format("woff"),
+    	 url("http://img3.douban.com/dae/presto/fonts/presto.ttf") format("truetype"),
+    	 url("http://img3.douban.com/dae/presto/fonts/presto.svg#prestoicons") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+.prestoicon-android:before, .prestoicon-apple:before, [data-icon]:before {
+    font-family: "presto";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1; 
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+.prestoicon-apple:before {
+    content: "\e600";
+}
+.prestoicon-android:before {
+    content: "\e601";
+}
+[data-icon]:before {
+    content: attr(data-icon);
+}
+html {
+    background: #f6f6f6;
+    color: #2f2f2f;
+}
+body,html{font-size:16px;}
+p{margin:1em 0;}
+a{text-decoration:none;}
+a:active,a:focus,a:hover,a:link,a:visited{
+	color:#21bba6;
+    background: 0;
+}
+.container {
+    _width: 580px;
+    max-width: 580px;
+    padding: 0 1em;
+    margin-top: 50px;
+    margin: 0 auto;
+}
+.bs-docs-container {
+    margin-top: 25px;
+    min-height: 500px;
+}
+.bs-header {
+    position: relative;
+    padding: 16px 0;
+    font-size: 16px;
+    background: #eaefee;
+    line-height: 2;
+    color: #888
+}
+.bs-header .nav-logo{font-size:22px}
+.bs-header .nav-logo 
+.logo{float:left;margin-right:24px;vertical-align:text-bottom;}
+.bs-header .slogan{display:block;overflow:hidden;*zooom:1;line-height:1.3;}
+.bs-header .slogan span{
+	display:block;font-size:16px;color:#888;
+}
+.bs-header ul {
+    float: right;
+    margin-top: 10px;
+}
+.bs-header li {
+    display: inline-block; 
+    * display: inline;
+}
+.bs-header li a {
+    display: block;
+    padding: 4px 5px;
+    font-size: 14px;
+    border-radius: 4px
+}
+.bs-header li a:before {
+    font-size: 130% ;
+    margin-right: 10px
+}
+.bs-header li a:hover {
+    background: #dee9e7
+}
+.bs-header li span {
+    font-size: 12px;
+}
+.bs-header li.download-btn {
+    padding: 3px 6px;
+    font-size: 12px;
+    background: #21bba6;color:#fff;
+}
+.bs-header li.download-btn:hover {
+    background: #21bba6;
+}
+.bs-header li+li{margin-left:36px}
+.bs-docs-container .weixin p{
+	position:absolute;width:80%;padding:5%;margin:0;left:5%;top:50px;font-size:14px;line-height:1.42;color:#303537;
+    z-index: 1000;
+}
+.bs-docs-container .weixin img {
+    float: right;
+}
+@media(max-width: 480px) {
+	.bs-header .nav-logo.logo {
+        margin-right: 10px;
+    }
+}
