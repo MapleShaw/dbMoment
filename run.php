@@ -20,7 +20,7 @@
         return $isArticle;
     }
     
-    $arrArticle = traverse('article');
+    $arrArticle = array_reverse(traverse('article'));//文章从最新的加载
 
 	$smarty = new Smarty;	
 	$html = new simple_html_dom();

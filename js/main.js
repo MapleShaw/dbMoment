@@ -2,6 +2,7 @@
 
 	$(window).resize(function(){resizeLoad();});
 	
+	/*侧边栏做自适应*/
 	var resizeLoad = function(){
 		var downHtml = '';
 		$('.download').remove();
@@ -19,7 +20,7 @@
 	var loadTimes = 0;
     var loaded = true;//加载过程中，滚动失效，防止重复加载
 	var loadData = function(loadTimes){
-		$.getScript("http://localhost/data.js",function(){//data.js放在本地访问，浏览器会报错
+		$.getScript("http://localhost/data.js",function(){//data.js放在本地访问，浏览器会报错，http://www.mapleshaw.com/wp-content/moment/js/data.js
 	    	if (typeof down_json != 'undefined' && down_json!=null) {
 	    		var html = [];
 	    		
