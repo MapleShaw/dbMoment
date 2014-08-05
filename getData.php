@@ -1,5 +1,6 @@
 <?php
-
+	include('include/comFuc.php');
+	
 	// function runScript($path, $param) {
 	// 	exec($path . " " . $param , $rtnData);
 	// 	return $rtnData;
@@ -12,11 +13,14 @@
 		mkdir($article,0777);
 	}
 
-	for ($i=100000; $i <= 100001; $i++) { 
+	$arrArt = traverse('article');
+	$fromNo = end($arrArt);//这种做法只能在本地执行
+
+	for ($i=$fromNo; $i <= ($fromNo+101); $i++) { 
 		//$output = runScript("php getData.php",$i);
 
 		$sUrl = "http://moment.douban.com/post/".$i."/";
-		$proxyArr = array(0=>"http://222.189.239.74:808",1=>"http://211.162.39.98:80",2=>"http://222.74.28.14:23");
+		$proxyArr = array(0=>"http://123.190.46.20:8080",1=>"http://123.110.242.193:8088",2=>"http://1.59.159.176:18186");
 		for ($j=0; $j < 3; $j++) { 
 			$output = poster($sUrl,$proxyArr[$j]);
 			if($output[1]!="403"){
@@ -53,7 +57,7 @@
 	function poster($url,$proxy){
 		$ua = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.A.B.C Safari/525.13';
 		$ch = curl_init();
-		curl_setopt ($ch, CURLOPT_PROXY, $proxy);//http://pachong.org/ 爬虫代理
+		curl_setopt ($ch, CURLOPT_PROXY, $proxy);//http://pachong.org/ 爬虫代理，会有问题，这些IP
 		curl_setopt($ch,CURLOPT_URL, $url);
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);

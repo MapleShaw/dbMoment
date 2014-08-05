@@ -17,10 +17,38 @@
 	};
 	resizeLoad();
 
+    //对getScript的一个优化，目前data.js还没有分割，一个文件随着文章数量的提升会变得很大，getScript在每次滚动加载都会调用，会重新请求一次data.js
+	var scriptsArray = new Array();
+    $.cachedScript = function(url, options) {
+        //循环script标记数组 
+        for (var s in scriptsArray) {
+            //console.log(scriptsArray[s]); 
+            //如果某个数组已经下载到了本地 
+            if (scriptsArray[s] == url) {
+                return { //则返回一个对象字面量，其中的done之所以叫做done是为了与下面$.ajax中的done相对应 
+                    done: function(method) {
+                        if (typeof method == 'function') { //如果传入参数为一个方法 
+                            method();
+                        }
+                    }
+                };
+            }
+        }
+        //这里是jquery官方提供类似getScript实现的方法，也就是说getScript其实也就是对ajax方法的一个拓展 
+        options = $.extend(options || {}, {
+            dataType: "script",
+            url: url,
+            cache: true //其实现在这缓存加与不加没多大区别 
+        });
+        scriptsArray.push(url); //将url地址放入script标记数组中 
+        return $.ajax(options);
+    };
+
+
 	var loadTimes = 0;
     var loaded = true;//加载过程中，滚动失效，防止重复加载
 	var loadData = function(loadTimes){
-		$.getScript("http://localhost/data.js",function(){//data.js放在本地访问，浏览器会报错，http://www.mapleshaw.com/wp-content/moment/js/data.js
+		$.cachedScript("http://localhost/data.js").done(function(){//data.js放在本地访问，浏览器会报错，http://www.mapleshaw.com/wp-content/moment/js/data.js
 	    	if (typeof down_json != 'undefined' && down_json!=null) {
 	    		var html = [];
 	    		
@@ -55,6 +83,7 @@
 	    });
 	};
 	loadData(loadTimes);
+
 
 	
 

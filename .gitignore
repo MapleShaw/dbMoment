@@ -12,6 +12,8 @@
 
 index.html
 article/*.html
+Gruntfile.js
+package.json
 
 templates_c/
 
