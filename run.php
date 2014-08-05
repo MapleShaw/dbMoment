@@ -54,7 +54,7 @@
     $smarty->assign('liArr',$liArr);
 	
 	$liJson = 'var down_json = '.json_encode($liArr,true);
-    if(($jsRes=fopen("/js/data.js","w+")) === FALSE){
+    if(($jsRes=fopen("js/data.js","w+")) === FALSE){
 	 
 		echo("Yo!js文件创建失败！！");   	 
 		exit(); 

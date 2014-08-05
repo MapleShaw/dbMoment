@@ -82,17 +82,7 @@
         <div class="post-body">
           <div id="content">
             <ul>
-            <!-- {foreach from=$liArr key=num item=value}
-              <li>
-                <p><a href="{$value.href}" target="_blank" style="font-weight:bold;">{$value.title}</a></p>
-                <img class="avatar" width="34" height="34" src="{$value.avatarImg}">
-                <a href="{$value.authorHref}" target="_blank">{$value.author}</a>
-                {if $value.contentImg!=''}
-                <img width="50%" height="50%" style="margin:10px;" src="{$value.contentImg}">
-                {/if}
-                <p>{$value.firstP}</p>
-              </li>
-            {/foreach} -->
+
             </ul>
           </div>
         </div>

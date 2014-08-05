@@ -15,8 +15,8 @@
 
 	$arrArt = traverse('article');
 	$fromNo = end($arrArt);//这种做法只能在本地执行
-
-	for ($i=$fromNo; $i <= ($fromNo+101); $i++) { 
+	$noneNum =0;
+	for ($i=($fromNo+1); $i <= ($fromNo+301); $i++) { 
 		//$output = runScript("php getData.php",$i);
 
 		$sUrl = "http://moment.douban.com/post/".$i."/";
@@ -49,9 +49,10 @@
 
 			fclose ($TxtRes);
 		}else{
-
+			$noneNum++; echo $noneNum;
 		}
 		
+		if($noneNum==100){echo "估计没有文章了(⊙０⊙)"; break;} 
 	}
 
 	function poster($url,$proxy){
