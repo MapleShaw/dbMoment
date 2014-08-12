@@ -5,19 +5,23 @@
 	
 	
     
-    $arrArticle = array_reverse(traverse('article'));//文章从最新的加载
+    //$arrArticle = array_reverse(traverse('article'));//文章从最新的加载
+
+    $temp = file('js/artIdArrData.js'); 
+
+    $getArrIdJs = array_reverse(explode(",", trim($temp[0],'[ ]'))); 
 
 	$smarty = new Smarty;	
 	$html = new simple_html_dom();
 
 	
-	$count  =  count($arrArticle);
+	$count = count($getArrIdJs);
 
 	$liArr = array();
 	for ($i=0; $i < $count; $i++) { 
 
-		$articleID = $arrArticle[$i];
-		$html->load_file('article/'.$articleID.'.html');
+		$articleID = $getArrIdJs[$i];
+		$html->load_file('http://moment.douban.com/post/'.$articleID.'/');
 
 		/*自定义想取的变量http://www.ecartchina.com/php-simple-html-dom/manual.htm*/
 		$title = $html->find('h1[id=title]',0)->plaintext;
@@ -51,44 +55,56 @@
 
 	$html->clear();//避免解析器消耗过多内存
 
-    $smarty->assign('liArr',$liArr);
+    //$smarty->assign('liArr',$liArr);
+	$tempArr = array();
+	$jsNum = ceil(count($liArr)/20);
+    for ($i=0; $i < $jsNum; $i++) { 
+    	for ($j=($jsNum*20); $j < ($jsNum*20+20); $j++) { 
+    		if($liArr[$j]){
+    			array_push($tempArr,$liArr[$j]);	
+    		}else{
+    			break;
+    		}
+    		    	
+    	}
+    	$liJson = 'var down_json = '.json_encode($tempArr,true);
+	    if(($jsRes=fopen("js/data"+ $i +".js","w+")) === FALSE){
+		 
+			echo("Yo!js文件创建失败！！");   	 
+			exit(); 
+		}
+		 
+		if(!fwrite ($jsRes,$liJson)){
+
+			echo ("Shit!js写入失败！！");
+			fclose($jsRes);
+			exit();  
+
+		} 
+    }
+
 	
-	$liJson = 'var down_json = '.json_encode($liArr,true);
-    if(($jsRes=fopen("js/data.js","w+")) === FALSE){
+    /*数据从js获取，不使用模版*/
+	// $indexOutput = $smarty->fetch('Smarty/demo/templates/index.tpl');
+
+
+	// if(($indexRes=fopen("index.html","w+")) === FALSE){
 	 
-		echo("Yo!js文件创建失败！！");   	 
-		exit(); 
-	}
-
-	 
-	if(!fwrite ($jsRes,$liJson)){
-
-		echo ("Shit!js写入失败！！");
-		fclose($jsRes);
-		exit();  
-
-	} 
-
-	$indexOutput = $smarty->fetch('Smarty/demo/templates/index.tpl');
-
-
-	if(($indexRes=fopen("index.html","w+")) === FALSE){
-	 
-		echo("Yo!首页创建失败！！");   	 
-		exit(); 
-	}
+	// 	echo("Yo!首页创建失败！！");   	 
+	// 	exit(); 
+	// }
 
 	 
-	if(!fwrite ($indexRes,$indexOutput)){
+	// if(!fwrite ($indexRes,$indexOutput)){
 
-		echo ("Shit!首页写入失败！！");
-		fclose($indexRes);
-		exit();  
+	// 	echo ("Shit!首页写入失败！！");
+	// 	fclose($indexRes);
+	// 	exit();  
 
-	}  
+	// }  
 	 
-	echo "Hey!首页生成啦！！\n\n";
+	// echo "Hey!首页生成啦！！\n\n";
 
-	fclose ($indexRes);
+	// fclose ($indexRes);
 		
 ?>

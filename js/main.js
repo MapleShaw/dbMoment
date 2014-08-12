@@ -45,18 +45,41 @@
     };
 
 
+
+
 	var loadTimes = 0;
     var loaded = true;//加载过程中，滚动失效，防止重复加载
 	var loadData = function(loadTimes){
-		$.cachedScript("http://localhost/data.js").done(function(){//data.js放在本地访问，浏览器会报错，http://www.mapleshaw.com/wp-content/moment/js/data.js
+		$.cachedScript("http://localhost/sqlData/data"+loadTimes+".js").done(function(){//data.js放在本地访问，浏览器会报错，http://www.mapleshaw.com/wp-content/moment/js/data.js
 	    	if (typeof down_json != 'undefined' && down_json!=null) {
-	    		var html = [];
+	    		var html = []; 
 	    		
 	    		var totalNum = down_json.length;
 	    		
-	    		var perNum = loadTimes*10;
+	    		//var perNum = loadTimes*10; 
 	    		
-	    		for (var i = perNum; i < (perNum+10); i++) {
+	    		// for (var i = perNum; i < (perNum+10); i++) {
+	    		// 	console.log(totalNum)
+	    		// 	if(down_json[i].contentImg != ''){
+	    		// 		html.push('<li>\
+						 //            <p><a href="'+down_json[i].href+'" target="_blank" style="font-weight:bold;">'+down_json[i].title+'</a></p>\
+						 //            <img class="avatar" width="34" height="34" src="'+down_json[i].avatarImg+'">\
+						 //            <a href="'+down_json[i].authorHref+'" target="_blank">'+down_json[i].author+'</a>\
+						 //            <img width="50%" height="50%" style="margin:10px;" src="'+down_json[i].contentImg+'">\
+						 //            <p>'+down_json[i].firstP+'</p>\
+						 //         </li>');
+	    		// 	}else{
+	    		// 		html.push('<li>\
+						 //            <p><a href="'+down_json[i].href+'" target="_blank" style="font-weight:bold;">'+down_json[i].title+'</a></p>\
+						 //            <img class="avatar" width="34" height="34" src="'+down_json[i].avatarImg+'">\
+						 //            <a href="'+down_json[i].authorHref+'" target="_blank">'+down_json[i].author+'</a>\
+						 //            <p>'+down_json[i].firstP+'</p>\
+						 //         </li>');
+	    		// 	}
+	    				
+	    		// }
+
+	    		for (var i = 0; i < totalNum; i++) {
 	    			
 	    			if(down_json[i].contentImg != ''){
 	    				html.push('<li>\
@@ -76,13 +99,24 @@
 	    			}
 	    				
 	    		}
+
 	    		html = html.join('');
 	    		$('#content').find('ul').append(html);
 	    		loaded = true;
 	    	}
 	    });
 	};
-	loadData(loadTimes);
+
+	//增加一个加载js文件的请求获得最新的dataJs文件序号
+	$.cachedScript("http://localhost/keepTheArticleNo.js").done(function(){
+		if (typeof signal != 'undefined' && signal!=null) {
+			loadTimes = signal.dataJsNo;
+			loadData(loadTimes);
+		}
+		
+	});
+
+	
 
 
 	
@@ -92,7 +126,7 @@
 		if(loaded && ($(window).scrollTop() + $(window).height() > anchor)){
 			loaded = false;
 			$('#contentBar').fadeIn(1500);
-			loadTimes++;
+			loadTimes--;
 			setTimeout(function(){
 				$('#contentBar').fadeOut(1500,function(){loadData(loadTimes);});				
 			},2000);
