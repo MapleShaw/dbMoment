@@ -1,0 +1,1 @@
+var signal = {"artId":104343,"dataJsNo":45,"lastArtNum":20}

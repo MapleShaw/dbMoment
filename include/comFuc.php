@@ -8,7 +8,8 @@ include('include/simple_html_dom.php');
         $current_dir = opendir($path);    //opendir()返回一个目录句柄,失败返回false
         while(($file = readdir($current_dir)) !== false) {    //readdir()返回打开目录句柄中的一个条目
             $sub_dir = $path . DIRECTORY_SEPARATOR . $file;    //构建子目录路径
-            if($file == '.' || $file == '..') {
+
+            if($file == '.' || $file == '..' || strstr($file,'_')) {
                 continue;
             } else {    //如果是文件,直接输出
                 $isArticle[$num] = substr(basename($file,".js"),4);//获取文件名，去掉后缀
@@ -81,7 +82,7 @@ include('include/simple_html_dom.php');
         if($addOrUpdate){
             $keepNo = array("artId"=>$keepNo,"dataJsNo"=>($sqlArrLast+1),"lastArtNum"=>$lastArtNum);
             $keepNoJson = 'var signal = '.json_encode($keepNo,true);
-            if(($txtRes=fopen("keepTheArticleNo.js","w+")) === FALSE){
+            if(($txtRes=fopen("js/keepTheArticleNo.js","w+")) === FALSE){
              
                 echo("Yo!记录文件创建失败！！");       
                 exit(); 
@@ -97,6 +98,23 @@ include('include/simple_html_dom.php');
             echo ("Yeah!js写入成功！！"); 
         }
         
+    }
+
+    function longTimeNoCut($arr,$arrNo,$sqlArrLast){
+        $arrNum = count($arr);
+        for ($i=0; $i < ceil($arrNum/20); $i++) { //尽量不要出现写死的常量
+            $arrTmp = array();
+            for ($j=0; $j < 20; $j++) { 
+                $no = $i*20+$j;
+                if($no<$arrNum){
+                    array_push($arrTmp, $arr[$no]);
+                }else{
+                    break;
+                }           
+            }
+            //array_splice($arr,0,20);不需要这个，上面for循环超过二十之后是继续叠加21，22...这样，加上这句反而会出现undefined offset
+            writeDown($arrTmp,$arrNo,$sqlArrLast+$i,true);
+        }
     }
 
  ?>

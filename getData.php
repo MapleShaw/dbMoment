@@ -1,6 +1,6 @@
 <?php
 	include('include/comFuc.php');
-echo '111'; exit();
+
 	// function runScript($path, $param) {
 	// 	exec($path . " " . $param , $rtnData);
 	// 	return $rtnData;
@@ -19,8 +19,9 @@ echo '111'; exit();
 	//获取最新的js数据文件
 	$sqlArrLast = (int)max(traverse('sqlData'));//记得替换路径
 
+
 	//{"artId":104071,"dataJsNo":41}，里面的变量要双引号json_decode才有效果！
-	$keepObj = json_decode(str_replace('var signal = ','',file_get_contents('keepTheArticleNo.js')),true);
+	$keepObj = json_decode(str_replace('var signal = ','',file_get_contents('js/keepTheArticleNo.js')),true);
 	$fromNo = $keepObj['artId'];
 
 	$noneNum = 0;
@@ -93,10 +94,19 @@ echo '111'; exit();
 				$getLastArt = array_reverse($getLastArt);
 				writeDown($getLastArt,$keepNo,($sqlArrLast-1),false);//更新一下原来的js
 				array_splice($liArr,0,(20-$getLastArtNum));//新爬到的文章ID补缺之后需要删除
-				writeDown($liArr,$keepNo,$sqlArrLast,true);
+				if(count($liArr)>20){
+					longTimeNoCut($liArr,$keepNo,$sqlArrLast);
+				}else{
+					writeDown($liArr,$keepNo,$sqlArrLast,true);
+				}
+				
 			}
 		}else{
-			writeDown($liArr,$keepNo,$sqlArrLast,true);
+			if(count($liArr)>20){
+				longTimeNoCut($liArr,$keepNo,$sqlArrLast);
+			}else{
+				writeDown($liArr,$keepNo,$sqlArrLast,true);
+			}
 		}
 	}
 
